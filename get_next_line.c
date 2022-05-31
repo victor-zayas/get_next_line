@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:52:18 by vzayas-s          #+#    #+#             */
-/*   Updated: 2022/05/31 19:13:53 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2022/05/31 20:34:40 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	int			i;
 
+	if (fd < 1 || fd == 2)
+		return (NULL);
 	buff_read = alloc_buf();
 	if (!buff_read)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:52:18 by vzayas-s          #+#    #+#             */
-/*   Updated: 2022/05/25 12:25:46 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:13:53 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*alloc_buf(void)
 
 	buff_read = malloc (sizeof(char) * BUFFER_SIZE + 1);
 	if (!buff_read)
-	{
-		free(buff_read);
 		return (NULL);
-	}
 	return (buff_read);
 }
 
@@ -93,21 +90,3 @@ char	*get_next_line(int fd)
 	}
 	return (alloc_and_free(tmp, buff_read, i));
 }
-
-/* int	main(void)
-{
-	int		fd;
-	int		i;
-	char	*result;
-
-	i = 0;
-	fd = open("test.txt", O_RDONLY);
-	while (i < 5)
-	{
-		result = get_next_line(fd);
-		printf("%s", result);
-		free(result);
-		i++;
-	}
-	close(fd);
-} */

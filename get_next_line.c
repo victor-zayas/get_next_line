@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:52:18 by vzayas-s          #+#    #+#             */
-/*   Updated: 2022/05/31 20:34:40 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2022/05/31 21:01:12 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ char	*join(int fd, char *buff_read, char *tmp)
 			return (NULL);
 		}
 		buff_read[verification] = '\0';
-		aux_tmp = tmp;
-		tmp = ft_strjoin(tmp, buff_read);
+		aux_tmp = ft_strdup(tmp);
+		free(tmp);
+		tmp = ft_strjoin(aux_tmp, buff_read);
 		if (!tmp)
 			return (NULL);
 		free(aux_tmp);
@@ -75,9 +76,14 @@ char	*get_next_line(int fd)
 	if (!buff_read)
 		return (NULL);
 	if (str)
-		tmp = str;
+	{
+		tmp = ft_strdup(str);
+	}
 	else
-		tmp = ft_calloc(1, sizeof(char));
+	{
+		tmp = (char *)malloc(sizeof(char));
+		tmp[0] = 0;
+	}
 	tmp = join(fd, buff_read, tmp);
 	if (!tmp || !buff_read)
 		return (NULL);
@@ -92,3 +98,21 @@ char	*get_next_line(int fd)
 	}
 	return (alloc_and_free(tmp, buff_read, i));
 }
+
+/* int main(void)
+{
+	int i;
+	char *result;
+	int fd;
+
+	i = 0;
+	fd = open("big_line_with_nl", O_RDONLY);
+	while (i < 2)
+	{
+		result = get_next_line(fd);
+		printf("%s", result);
+		free(result);
+		i++;
+	}
+	close(fd);
+} */

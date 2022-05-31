@@ -6,17 +6,16 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:52:30 by vzayas-s          #+#    #+#             */
-/*   Updated: 2022/05/24 22:07:25 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2022/05/31 21:05:43 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
-#include <stddef.h>
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (NULL);
@@ -32,22 +31,20 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	count;
+	int	count;
 
 	count = 0;
 	while (str[count] != '\0')
-	{
 		count++;
-	}
 	return (count);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
 	char	*result;
-	size_t	i;
+	int	i;
 
 	if (s == NULL)
 		return (NULL);
@@ -98,19 +95,20 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (result);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_strdup(const char *s)
 {
-	size_t	i;
-	void	*p;
+	char	*p;
+	int		i;
 
+	p = malloc(ft_strlen(s) + 1);
+	if (p == NULL)
+		return (p);
 	i = 0;
-	p = malloc(size * nmemb);
-	if (!p)
-		return (NULL);
-	while (i < size * nmemb)
+	while (s[i])
 	{
-		((char *)p)[i] = 0;
+		p[i] = s[i];
 		i++;
 	}
+	p[i] = 0;
 	return (p);
 }
